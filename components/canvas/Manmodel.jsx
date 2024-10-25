@@ -1,8 +1,9 @@
 'use client'
-import React, { useEffect, useRef } from 'react'
+import React, { Suspense, useEffect, useRef } from 'react'
 import { Canvas} from '@react-three/fiber'
 import { useGLTF, OrbitControls, useFBX, useAnimations } from '@react-three/drei'
 import { Computers } from './Computers';
+import CanvasLoader from '../Loader';
 
 function Model(props){
   const group=useRef();
@@ -111,7 +112,7 @@ export default function Modelman() {
       <pointLight intensity={0.6} />
       <directionalLight position={[5, 5, 5]} intensity={0.8} castShadow />
       <OrbitControls maxPolarAngle={Math.PI / 2} minPolarAngle={Math.PI / 2} enableZoom={false} /> {/* Allow zooming for better control */}
-      
+      <Suspense fallback={<CanvasLoader/>}>
       <group scale={1}>
         <Model />
         <mesh position={[0, -1.73, -2.4]}>
@@ -120,6 +121,7 @@ export default function Modelman() {
         </mesh>
         <Computers isMobile={false}/>
       </group>
+      </Suspense>
     </Canvas>
   )
 }

@@ -1,18 +1,14 @@
 'use client'
 import { OrbitControls, Preload, useGLTF } from '@react-three/drei'
-import { Canvas, useFrame } from '@react-three/fiber'
-import React, { useRef } from 'react'
-import {Group} from 'three'
+import { Canvas} from '@react-three/fiber'
+import React, { Suspense, useRef } from 'react'
+import CanvasLoader from '../Loader';
+
 
 const RotatingPlanet: React.FC = () => {
     const { scene } = useGLTF("./planet/scene.gltf");
-    const ref = useRef<Group>(null);
+    const ref = useRef(null);
 
-    useFrame((state, delta) => {
-        if (ref.current) {
-            ref.current.rotation.y += 0.01 * delta;
-        }
-    });
 
     return (
         <mesh ref={ref}>
@@ -25,7 +21,9 @@ const Planet: React.FC = () => {
     return (
         <Canvas>
             <OrbitControls enableZoom={false}/>
+            <Suspense fallback={<CanvasLoader/>}>
             <RotatingPlanet />
+            </Suspense>
             <Preload all />
         </Canvas>
     );

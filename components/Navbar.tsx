@@ -24,7 +24,7 @@ const Navbar=()=>{
     },[])
     
     return (
-        <nav className={`w-full py-5 flex items-center fixed top-0 z-100 ${scolled?'bg-third':'bg-transparent'}  `}>
+        <nav className={`w-full py-5 flex items-center top-0 z-100   `}>
                  <div className="flex justify-between  items-center mx-auto max-w-7xl w-11/12 ">
                     <Link className="text-white font-bold text-xl" href="/">
                     Siddak.
